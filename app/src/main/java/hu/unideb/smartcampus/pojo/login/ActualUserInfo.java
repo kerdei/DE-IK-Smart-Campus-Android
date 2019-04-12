@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ActualUserInfo {
     String username;
-    String xmppPassword;
+    String password;
     List<Role> roles;
 }

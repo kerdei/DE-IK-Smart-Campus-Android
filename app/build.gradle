@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 repositories {
     mavenCentral()
-    maven { url "http://wt2.inf.unideb.hu/artifactory/libs-snapshot-local" }
     google()
 }
 
@@ -17,14 +16,7 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
     }
-    signingConfigs {
-        release {
-            keyAlias SMARTCAMPUS_RELEASE_ALIAS
-            keyPassword SMARTCAMPUS_RELEASE_KEY_PASS
-            storeFile file(SMARTCAMPUS_RELEASE_STORE_FILE)
-            storePassword SMARTCAMPUS_RELEASE_STORE_PASS
-        }
-    }
+
     compileSdkVersion 27
     defaultConfig {
         multiDexEnabled true
@@ -45,7 +37,6 @@ android {
             }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -68,8 +59,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
-    //backend
-    compile 'hu.unideb:smart-campus-shared-iq:1.3-SNAPSHOT'
 
     //butterknife
     compile 'com.jakewharton:butterknife:8.8.1'
@@ -85,11 +74,11 @@ dependencies {
     compile 'com.balysv:material-ripple:1.0.2'
 
     //lombok
-    provided "org.projectlombok:lombok:1.16.20"
-    annotationProcessor "org.projectlombok:lombok:1.16.20"
+    provided "org.projectlombok:lombok:1.18.6"
+    annotationProcessor "org.projectlombok:lombok:1.18.6"
 
     //okhttp
-    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
     //google services
     compile 'com.google.android.gms:play-services:10.2.1'

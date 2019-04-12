@@ -8,16 +8,15 @@ import org.jivesoftware.smack.packet.IQ;
 import org.jxmpp.jid.impl.JidCreate;
 import org.jxmpp.stringprep.XmppStringprepException;
 
-import hu.unideb.smartcampus.shared.iq.request.AddCustomEventIqRequest;
-import hu.unideb.smartcampus.shared.iq.request.element.CustomEventIqElement;
 import hu.unideb.smartcampus.xmpp.Connection;
 
 import static hu.unideb.smartcampus.xmpp.Connection.ADMINJID;
 
 public class AddCustomEventHandler {
 
-    public static void add(String uuid,Long eventWhen,String eventName, String eventDescription, String eventPlace, Long eventStart, Long eventEnd,String repeat, String remainder) {
+    public static void add(String uuid, Long eventWhen, String eventName, String eventDescription, String eventPlace, Long eventStart, Long eventEnd, String repeat, String remainder) {
         XMPPBOSHConnection xmppboshConnection = Connection.getInstance().getXmppConnection();
+        /*
         try {
             AddCustomEventIqRequest addCustomEventIqRequest = new AddCustomEventIqRequest();
             addCustomEventIqRequest.setStudent(xmppboshConnection.getUser().getLocalpartOrThrow().toString());
@@ -45,5 +44,6 @@ public class AddCustomEventHandler {
         } catch (SmackException.NoResponseException | SmackException.NotConnectedException | InterruptedException | XMPPException.XMPPErrorException | XmppStringprepException e) {
             e.printStackTrace();
         }
+        */
     }
 }

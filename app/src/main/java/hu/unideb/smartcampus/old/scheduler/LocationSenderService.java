@@ -31,7 +31,6 @@ import org.jxmpp.stringprep.XmppStringprepException;
 
 import java.io.IOException;
 
-import hu.unideb.smartcampus.shared.iq.request.UserLocationIqRequest;
 import hu.unideb.smartcampus.xmpp.Connection;
 
 import static com.google.android.gms.location.LocationServices.FusedLocationApi;
@@ -58,7 +57,7 @@ public class LocationSenderService extends IntentService implements GoogleApiCli
         try {
 
             config = BOSHConfiguration.builder()
-                    // .setUsernameAndPassword(finalActualUserInfo.getUsername(), finalActualUserInfo.getXmppPassword())
+                    // .setUsernameAndPassword(finalActualUserInfo.getUsername(), finalActualUserInfo.getPassword())
                     //TODO READ FROM DB
                     .setUsernameAndPassword("headswitcher", "39a35530-0ff3-48f1-a9cb-36ff3c4315e2")
                     //.setUsernameAndPassword("testuser", "admin")
@@ -95,8 +94,9 @@ public class LocationSenderService extends IntentService implements GoogleApiCli
 
     private void getLocationForService() {
         if (mLastLocation != null) {
-
+        /*
             try {
+
                 sleep(SmackConfiguration.getDefaultReplyTimeout());
                 UserLocationIqRequest userLocationIqRequest = new UserLocationIqRequest();
                 EntityFullJid user = null;
@@ -125,7 +125,9 @@ public class LocationSenderService extends IntentService implements GoogleApiCli
                 Log.e(TAG, "getLocationForService: ERROR ");
                 e.printStackTrace();
             }
+            */
         }
+
     }
 
     @Override

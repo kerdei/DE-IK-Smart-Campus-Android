@@ -22,7 +22,6 @@ import hu.unideb.smartcampus.fragment.officehours.OfficeHourFragment;
 import hu.unideb.smartcampus.pojo.officehours.FromToDatesInLong;
 import hu.unideb.smartcampus.pojo.officehours.Instructor;
 import hu.unideb.smartcampus.pojo.officehours.OfficeHour;
-import hu.unideb.smartcampus.shared.iq.request.InstructorConsultingDatesIqRequest;
 import hu.unideb.smartcampus.xmpp.Connection;
 
 import static hu.unideb.smartcampus.dialog.loading.LoadingDialog.LOADING_DIALOG_TAG;
@@ -46,25 +45,6 @@ public class OfficeHoursTeacherTask extends AsyncTask<Instructor, Long, Instruct
 
     @Override
     protected Instructor doInBackground(Instructor... instructors) {
-
-        try {
-            InstructorConsultingDatesIqRequest iq = new InstructorConsultingDatesIqRequest();
-
-            iq.setInstructorId(instructors[0].getInstructorId().toString());
-            iq.setType(IQ.Type.get);
-            iq.setTo(JidCreate.from(ADMINJID));
-
-            final StanzaCollector stanzaCollectorAndSend = Connection.getInstance().getXmppConnection().createStanzaCollectorAndSend(iq);
-            final InstructorConsultingDatesIqRequest iqRequest = stanzaCollectorAndSend.nextResultOrThrow(5000);
-            return OfficeHourConverter.convertToAskInstructorOfficeHourPojo(iqRequest);
-
-        } catch (SmackException.NotConnectedException
-                | XMPPException.XMPPErrorException
-                | SmackException.NoResponseException
-                | XmppStringprepException
-                | InterruptedException e) {
-            e.printStackTrace();
-        }
         return new Instructor();
     }
 

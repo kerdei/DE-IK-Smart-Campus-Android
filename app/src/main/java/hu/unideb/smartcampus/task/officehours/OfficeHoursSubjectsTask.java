@@ -21,7 +21,6 @@ import hu.unideb.smartcampus.fragment.officehours.OfficeHourFragment;
 import hu.unideb.smartcampus.pojo.officehours.AskSubjectsPojo;
 import hu.unideb.smartcampus.pojo.officehours.Instructor;
 import hu.unideb.smartcampus.pojo.officehours.Subject;
-import hu.unideb.smartcampus.shared.iq.request.SubjectsIqRequest;
 import hu.unideb.smartcampus.xmpp.Connection;
 
 import static hu.unideb.smartcampus.dialog.loading.LoadingDialog.LOADING_DIALOG_TAG;
@@ -54,23 +53,6 @@ public class OfficeHoursSubjectsTask extends AsyncTask<String, Long, AskSubjects
     @Override
     protected AskSubjectsPojo doInBackground(String... strings) {
         final Connection connection = Connection.getInstance();
-        try {
-            SubjectsIqRequest iq = new SubjectsIqRequest();
-            iq.setStudent(connection.getXmppConnection().getUser().getLocalpartOrThrow().toString());
-            iq.setType(IQ.Type.get);
-            iq.setTo(JidCreate.from(ADMINJID));
-
-            final StanzaCollector stanzaCollectorAndSend = Connection.getInstance().getXmppConnection().createStanzaCollectorAndSend(iq);
-            final SubjectsIqRequest subjectsIqRequest = stanzaCollectorAndSend.nextResultOrThrow(5000);
-            return OfficeHourConverter.convertToAskSubjectsProcessMessagePojo(subjectsIqRequest);
-
-        } catch (SmackException.NotConnectedException
-                | XMPPException.XMPPErrorException
-                | SmackException.NoResponseException
-                | XmppStringprepException
-                | InterruptedException e) {
-            e.printStackTrace();
-        }
         return new AskSubjectsPojo();
     }
 

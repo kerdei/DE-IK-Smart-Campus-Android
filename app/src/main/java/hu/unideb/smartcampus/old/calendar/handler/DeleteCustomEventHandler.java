@@ -8,7 +8,6 @@ import org.jivesoftware.smack.packet.IQ;
 import org.jxmpp.jid.impl.JidCreate;
 import org.jxmpp.stringprep.XmppStringprepException;
 
-import hu.unideb.smartcampus.shared.iq.request.DeleteCustomEventIqRequest;
 import hu.unideb.smartcampus.xmpp.Connection;
 
 import static hu.unideb.smartcampus.xmpp.Connection.ADMINJID;
@@ -17,6 +16,7 @@ public class DeleteCustomEventHandler {
 
     public static void delete(String uuid) {
         XMPPBOSHConnection xmppboshConnection = Connection.getInstance().getXmppConnection();
+        /*
         try {
             DeleteCustomEventIqRequest deleteCustomEventIqRequest = new DeleteCustomEventIqRequest();
             deleteCustomEventIqRequest.setStudent(xmppboshConnection.getUser().getLocalpartOrThrow().toString());
@@ -33,5 +33,6 @@ public class DeleteCustomEventHandler {
         } catch (SmackException.NoResponseException | SmackException.NotConnectedException | InterruptedException | XMPPException.XMPPErrorException | XmppStringprepException e) {
             e.printStackTrace();
         }
+        */
     }
 }

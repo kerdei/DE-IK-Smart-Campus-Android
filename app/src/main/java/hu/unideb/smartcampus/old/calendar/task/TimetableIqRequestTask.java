@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 import hu.unideb.smartcampus.old.calendar.converter.TimetableEventConverter;
 import hu.unideb.smartcampus.old.calendar.pojo.AskTimetableEventPojo;
-import hu.unideb.smartcampus.shared.iq.request.CalendarSubjectsIqRequest;
 import hu.unideb.smartcampus.xmpp.Connection;
 
 import static hu.unideb.smartcampus.xmpp.Connection.ADMINJID;
@@ -23,7 +22,9 @@ public class TimetableIqRequestTask extends AsyncTask<HashMap<String, String>, I
 
     @Override
     protected AskTimetableEventPojo doInBackground(HashMap<String, String>... params) {
+        /*
         try {
+
             CalendarSubjectsIqRequest iq = new CalendarSubjectsIqRequest();
             EntityFullJid user = Connection.getInstance().getXmppConnection().getUser();
             iq.setStudent(user.getLocalpartOrThrow().toString());
@@ -44,6 +45,7 @@ public class TimetableIqRequestTask extends AsyncTask<HashMap<String, String>, I
                 | InterruptedException e) {
             e.printStackTrace();
         }
+        */
 
         return new AskTimetableEventPojo();
 

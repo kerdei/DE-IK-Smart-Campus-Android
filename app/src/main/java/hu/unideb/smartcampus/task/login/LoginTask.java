@@ -3,10 +3,11 @@ package hu.unideb.smartcampus.task.login;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.ImageView;
 
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 
-import hu.unideb.smartcampus.activity.base.BaseActivity;
 import hu.unideb.smartcampus.activity.login.LoginActivity;
 import hu.unideb.smartcampus.activity.main.MainActivity;
 import hu.unideb.smartcampus.dialog.loading.LoadingDialog;
@@ -36,9 +37,9 @@ import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
 
 public class LoginTask extends AsyncTask<ActualUserInfo, Long, ReturnPojo> {
 
-    private LoadingDialog loadingDialog;
+    private LoadingDialog loadingDialog; //TODO
 
-    private Activity activity;
+    private Activity activity; //TODO
 
     public LoginTask(Activity activity) {
         this.activity = activity;
@@ -53,22 +54,15 @@ public class LoginTask extends AsyncTask<ActualUserInfo, Long, ReturnPojo> {
 
     @Override
     protected ReturnPojo doInBackground(ActualUserInfo... params) {
+        ActualUserInfo userLoginDetails = params[0];
+        int responseCode = BasicAuth.basicAuth(userLoginDetails);
 
-        ActualUserInfo actualUserInfo = params[0];
-        BasicAuthReturnPojo authReturnPojo = BasicAuth.basicAuth(actualUserInfo);
-
-        if (authReturnPojo.getStatusCode() == HttpURLConnection.HTTP_OK) {
-            ActualUserInfo xmppUserInfo = authReturnPojo.getActualUserInfo();
-            if (xmppUserInfo != null) {
-                Connection.startConnection(xmppUserInfo);
-            }
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            responseCode = Connection.establishConnection(userLoginDetails);
+            return new ReturnPojo(responseCode);
         } else {
-            return new ReturnPojo(authReturnPojo.getStatusCode());
+            return new ReturnPojo(responseCode);
         }
-        if (Connection.getInstance().getXmppConnection().isConnected()) {
-            return new ReturnPojo(HTTP_OK);
-        }
-        return new ReturnPojo(HTTP_INTERNAL_ERROR);
     }
 
     @Override
